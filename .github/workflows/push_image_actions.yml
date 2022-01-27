@@ -16,10 +16,10 @@ jobs:
         with:
           channel: "stable"
 
-     - name: Build Flutter Web
-       run: |
-         flutter pub get
-         flutter build web -t lib/main_production.dart
+      - name: Build Flutter Web
+        run: |
+          flutter pub get
+          flutter build web -t lib/main_production.dart
 
 
 
