@@ -31,20 +31,18 @@ jobs:
     # - name: Verify Changed pubspec.yaml files
     # - name: set file check
     - uses: actions/checkout@v2
-    - run: |
-        env.GIT_DIFF
-        env.GIT_DIFF_FILTERED
-        env.MATCHED_FILES
-
     - uses: technote-space/get-diff-action@v6
       with:
         files: |
           pubspec.yaml
     - name: pubspec.yaml changed
     # check the file that we specifies to have in different files between the latest file and the one being commited in git or not
-
       if: env.MATCHED_FILES
-      run: docker build -f update-imageflutterpubget/Dockerfile -t imageflutterpubget .
+      run: |
+        env.GIT_DIFF
+        env.GIT_DIFF_FILTERED
+        env.MATCHED_FILES
+        docker build -f update-imageflutterpubget/Dockerfile -t imageflutterpubget .
 
     # - uses: actions/checkout@v2
     # - run: |
