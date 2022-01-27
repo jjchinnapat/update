@@ -30,8 +30,9 @@ jobs:
 
     # - name: Verify Changed pubspec.yaml files
     # - name: set file check
-    - run: cd test
     - uses: actions/checkout@v2
+    - run: cd test
+    - run: pwd
     - uses: technote-space/get-diff-action@v6
       with:
         files: |
@@ -44,7 +45,6 @@ jobs:
 
     - uses: actions/checkout@v2
     - run: |
-        cd test
         docker build \
         -t ghcr.io/jjchinnapat/imageflutterweb:latest --build-arg GIT_PAT=${{ secrets.GIT_PAT }} .
         echo ${{ secrets.GIT_PAT }} | docker login ghcr.io -u jjchinnapat --password-stdin
