@@ -35,17 +35,19 @@ jobs:
       with:
         files: |
           pubspec.yaml
-      
+
+    - name: check diff  
       run: |
         echo env.GIT_DIFF
         echo env.GIT_DIFF_FILTERED
         echo env.MATCHED_FILES
+        
     - name: pubspec.yaml changed
     # check the file that we specifies to have in different files between the latest file and the one being commited in git or not
       if: env.MATCHED_FILES
       run: docker build -f update-imageflutterpubget/Dockerfile -t imageflutterpubget .
 
-    - name: check diff
+    
       
 
     # - uses: actions/checkout@v2
