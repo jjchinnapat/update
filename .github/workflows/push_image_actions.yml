@@ -30,7 +30,7 @@ jobs:
 
     # - name: Verify Changed pubspec.yaml files
     # - name: set file check
-    #   run : ls
+    - run: ls
     - uses: actions/checkout@v2
     - uses: technote-space/get-diff-action@v6
       with:
