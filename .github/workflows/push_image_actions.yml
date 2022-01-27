@@ -44,8 +44,7 @@ jobs:
 
 
       if: env.MATCHED_FILES
-      run: | 
-        docker build -f update-imageflutterpubget/Dockerfile -t imageflutterpubget .
+      run: docker build -f update-imageflutterpubget/Dockerfile -t imageflutterpubget .
 
     # - uses: actions/checkout@v2
     # - run: |
