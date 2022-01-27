@@ -41,8 +41,10 @@ jobs:
       run: |
         env.GIT_DIFF
         env.GIT_DIFF_FILTERED
-        env.MATCHED_FILES
-        docker build -f update-imageflutterpubget/Dockerfile -t imageflutterpubget .
+        env.MATCHED_FILESdocker build -f update-imageflutterpubget/Dockerfile -t imageflutterpubget .
+
+    - name: check diff
+      run: env.MATCHED_FILES
 
     # - uses: actions/checkout@v2
     # - run: |
