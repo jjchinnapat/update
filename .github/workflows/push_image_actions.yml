@@ -34,7 +34,6 @@ jobs:
     - uses: technote-space/get-diff-action@v6
       with:
         files: |
-          pubspec.yaml
           jj/pubspec.yaml
 
     - name: pubspec.yaml changed
