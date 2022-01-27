@@ -31,8 +31,6 @@ jobs:
     # - name: Verify Changed pubspec.yaml files
     # - name: set file check
     - uses: actions/checkout@v2
-    - run: cd test
-    - run: pwd
     - uses: technote-space/get-diff-action@v6
       with:
         files: |
