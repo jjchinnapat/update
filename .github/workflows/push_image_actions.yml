@@ -1,0 +1,50 @@
+name: check_build_push
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  push :
+    runs-on: self-hosted
+    steps:
+    # - name: Get changed files
+    #   id: changed-files
+    #   uses: tj-actions/changed-files@v2.1
+    # - name: pubspec.yaml has changed rebuild image
+    #   if: contains(steps.changed-files.outputs.modified_files, 'pubspec.yaml')
+    #   run: docker build -f update-imageflutterpubget/Dockerfile -t imageflutterpubget .
+
+    # - name: Verify Changed pubspec.yaml files
+    #   uses: tj-actions/verify-changed-files@v8.8
+    #   id: verify_changed_files
+    #   with:
+    #     files: |
+    #       pubspec.yaml
+    # - name: pubspec.yaml changed
+    #   if: steps.verify_changed_files.outputs.files_changed == 'true'
+    #   run: | 
+    #     docker build -f update-imageflutterpubget/Dockerfile -t imageflutterpubget .
+
+    # - name: Verify Changed pubspec.yaml files
+    # - name: set file check
+      run : ls
+    - uses: actions/checkout@v2
+    - uses: technote-space/get-diff-action@v6
+      with:
+        files: |
+          pubspec.yaml
+    - name: pubspec.yaml changed
+    # check the file that we specifies to have in different files between the latest file and the one being commited in git or not
+      if: env.MATCHED_FILES
+      run: | 
+        docker build -f update-imageflutterpubget/Dockerfile -t imageflutterpubget .
+
+    - uses: actions/checkout@v2
+    - run: |
+        docker build \
+        -t ghcr.io/jjchinnapat/imageflutterweb:latest --build-arg GIT_PAT=${{ secrets.GIT_PAT }} .
+        echo ${{ secrets.GIT_PAT }} | docker login ghcr.io -u jjchinnapat --password-stdin
+        docker push ghcr.io/jjchinnapat/imageflutterweb:latest
