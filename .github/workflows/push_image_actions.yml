@@ -10,19 +10,35 @@ jobs:
   push :
     runs-on: self-hosted
     steps:
+      - uses: actions/checkout@v2
+      - name: Flutter Action
+        uses: subosito/flutter-action@v1.5.3
+        with:
+          channel: "stable"
 
-    - uses: actions/checkout@v2
-    - uses: technote-space/get-diff-action@v6
-      with:
-        files: |
-          pubspec.yaml
+     - name: Build Flutter Web
+       run: |
+         flutter pub get
+         flutter build web -t lib/main_production.dart
 
-    - name: pubspec.yaml changed
-    # check the file that we specifies to have in different files between the latest file and the one being commited in git or not
-      if: contains(env.MATCHED_FILES , 'pubspec.yaml')
-      uses: imageflutterpubgetsf
-      run: flutter pub get
-#      docker build -f update-imageflutterpubget/Dockerfile -t imageflutterpubgetsf .
+
+
+
+
+
+    # - uses: actions/checkout@v2
+    # - uses: technote-space/get-diff-action@v6
+    #   with:
+    #     files: |
+    #       pubspec.yaml
+
+    # - name: pubspec.yaml changed
+    # # check the file that we specifies to have in different files between the latest file and the one being commited in git or not
+    #   if: contains(env.MATCHED_FILES , 'pubspec.yaml')
+    #   steps:
+    #     container:
+    #       image: imageflutterpubgetsf
+    #     - run: docker build -f update-imageflutterpubget/Dockerfile -t imageflutterpubgetsf .
 
     # - uses: actions/checkout@v2
     # - run: |
