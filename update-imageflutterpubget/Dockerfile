@@ -1,3 +1,3 @@
-FROM imageflutterpubget  as builder
+FROM imagefluttersetup
 COPY pubspec.yaml .
 RUN flutter pub get
