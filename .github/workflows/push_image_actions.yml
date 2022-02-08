@@ -9,7 +9,7 @@ name: check_build_push
 on:
   pull_request:
     branches:
-      - " master "
+      - "master"
 ###
 jobs:
   push :
