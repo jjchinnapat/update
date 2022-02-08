@@ -1,3 +1,3 @@
-FROM imagefluttersetup
+FROM imagefluttersf
 COPY pubspec.yaml .
 RUN flutter pub get
